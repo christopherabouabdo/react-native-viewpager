@@ -30,7 +30,9 @@ var ViewPager = React.createClass({
     ...View.propTypes,
     dataSource: PropTypes.instanceOf(ViewPagerDataSource).isRequired,
     renderPage: PropTypes.func.isRequired,
+    onChangePageStart: PropTypes.func,
     onChangePage: PropTypes.func,
+    onMove: PropTypes.func,
     renderPageIndicator: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.bool
@@ -106,6 +108,7 @@ var ViewPager = React.createClass({
         var dx = gestureState.dx;
         var offsetX = -dx / this.state.viewWidth + this.childIndex;
         this.state.scrollValue.setValue(offsetX);
+        this.props.onMove && this.props.onMove(dx);
       },
     });
 
@@ -187,6 +190,8 @@ var ViewPager = React.createClass({
     if (pageNumber > 0 || this.props.isLoop) {
       nextChildIdx = 1;
     }
+
+    moved && this.props.onChangePageStart && this.props.onChangePageStart(pageNumber);
 
     this.props.animation(this.state.scrollValue, scrollStep, gs)
       .start((event) => {
