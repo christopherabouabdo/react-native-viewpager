@@ -34,8 +34,14 @@ var ViewPager = require('react-native-viewpager');
 * **`autoPlay`**: `true` to turn page automatically,
 * **`isLoop`**: `true` to run in infinite scroll mode,
 * **`locked`**: `true` to disable touch scroll,
-* **`onChangePage`**: page change callback,
 * **`renderPageIndicator`**: render custom ViewPager indicator.
+
+## Event Hooks
+* **`hasTouch(hasTouch)`**: callback when touch interaction state changes, passes a boolean that describes whether the touch is active or inactive
+* **`onChangePageStart(nextPageIndex)`**: callback for the start of a page transition. Passes the index for the page being transitioned to
+* **`onChangePage(currentPageIndex)`**: callback for the completion of a page transition. Passes the index for the new current page
+* **`onMove(gestureStateDX)`**: callback that fires through the full swipe interaction and provides the current gestureState.dx value of the swipe
+
 
 ## Page Transition Animation Controls
 
